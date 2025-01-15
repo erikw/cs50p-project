@@ -12,7 +12,7 @@ def last_day_valid_from_today(days: int) -> date:
 
 
 def main():
-    visa_days: date = read_visa_validity_days()
+    visa_days: int = read_visa_validity_days()
     last_day: date = last_day_valid_from_today(visa_days)
     print(last_day)
 
