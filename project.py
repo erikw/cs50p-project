@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 
 
 def read_visa_validity_days() -> int:
@@ -10,8 +10,8 @@ def read_visa_validity_days() -> int:
 
 
 def last_day_valid_from_today(days: int) -> date:
-    # date.today()
-
+    delta = timedelta(days=days)
+    return date.today() + delta
 
 
 def main():
