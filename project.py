@@ -1,5 +1,6 @@
 from datetime import date
 
+
 def read_visa_validity_days() -> int:
     while True:
         try:
@@ -7,8 +8,10 @@ def read_visa_validity_days() -> int:
         except ValueError:
             pass
 
+
 def last_day_valid_from_today(days: int) -> date:
-    return date.today()
+    # date.today()
+
 
 
 def main():
@@ -16,5 +19,6 @@ def main():
     last_day: date = last_day_valid_from_today(visa_days)
     print(last_day)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
