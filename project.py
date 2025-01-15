@@ -8,7 +8,7 @@ def read_visa_validity_days() -> int:
             pass
 
 def last_day_valid_from_today(days: int) -> date:
-    pass
+    return date.today()
 
 
 def main():
