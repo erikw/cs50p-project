@@ -1,4 +1,8 @@
+# Dependencies
+pyfiglet
+
 # Development tools
-mypy
 black
+isort
+mypy
 pytest
