@@ -21,8 +21,8 @@ VISA_URL_FMT = "https://www.projectvisa.com/visainformation/{country}"
 VISA_INFO_BANNER_FMT = (
     "!~~~~~~~~~~~~~~~~~~~ 🛂 Visa Information for {country:} ~~~~~~~~~~~~~~~~~~~!"
 )
-COMMAND_VISA_INFO = 'visa_info'
-COMMAND_EXIT_CALC = 'exit_calc'
+COMMAND_VISA_INFO = "visa_info"
+COMMAND_EXIT_CALC = "exit_calc"
 
 # Cache of read countries.
 countries = None
@@ -233,13 +233,19 @@ def print_last_day_valid(days_valid, date_entry):
     print(f" ({last_day.strftime('%A %d, %B %Y')})")
 
     p = inflect.engine()
-    days_pluralized = p.plural_noun("day", abs(days_from_now)
+    days_pluralized = p.plural_noun("day", abs(days_from_now))
     if days_from_now < 0:
-        print(f"That was {days_from_now * -1} {days_pluralized} ago from today (excluding today). What are you still doing in the country? Get out now!")
+        print(
+            f"That was {days_from_now * -1} {days_pluralized} ago from today (excluding today). What are you still doing in the country? Get out now!"
+        )
     elif days_from_now > 0:
-        print(f"That is {days_from_now} {days_pluralized} from today (excluding today).")
+        print(
+            f"That is {days_from_now} {days_pluralized} from today (excluding today)."
+        )
     else:
-        print(f"Panic! Today is your last valid day. Make sure to leave the country before midnight!!")
+        print(
+            f"Panic! Today is your last valid day. Make sure to leave the country before midnight!!"
+        )
 
 
 def menu_exit_calculator():
@@ -256,6 +262,7 @@ def sigint_handler(sig, frame):
 def capture_interrupt_signal():
     signal.signal(signal.SIGINT, sigint_handler)
 
+
 def print_valid_countries():
     countries = valid_countries()
     print("Valid countries to query about Visa information:")
@@ -265,7 +272,9 @@ def print_valid_countries():
 def mode_cli():
     args = parse_cli_args()
 
-    from pprint import pprint; pprint(args)
+    from pprint import pprint
+
+    pprint(args)
 
     if args.command == COMMAND_VISA_INFO:
         if args.country:
@@ -275,10 +284,11 @@ def mode_cli():
     elif args.command == COMMAND_EXIT_CALC:
         print_last_day_valid(args.days_valid, args.entry_date)
     else:
-        print(f"Unknown command {args['command']}. Implementatin error. Contact developer and report bug.", file=sys.stderr)
+        print(
+            f"Unknown command {args['command']}. Implementatin error. Contact developer and report bug.",
+            file=sys.stderr,
+        )
         sys.exit()
-
-
 
 
 def mode_interactive():
