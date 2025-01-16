@@ -13,34 +13,115 @@ from colorama import Fore, Style
 from datetime import date, timedelta
 
 
-PROGRAM_NAME = 'Visa Tool'
+PROG_NAME = "Visa Tool"
+PROG_VERSION = (1, 0, 0)
 TERM_WIDTH = 120
 COUNTRIES_CSV_PATH = "countries.csv"
 VISA_URL_FMT = "https://www.projectvisa.com/visainformation/{country}"
-VISA_INFO_BANNER_FMT = "!~~~~~~~~~~~~~~~~~~~ 🛂 Visa Information for {country:} ~~~~~~~~~~~~~~~~~~~!"
+VISA_INFO_BANNER_FMT = (
+    "!~~~~~~~~~~~~~~~~~~~ 🛂 Visa Information for {country:} ~~~~~~~~~~~~~~~~~~~!"
+)
+
+# Cache of read countries.
+countries = None
+
+
+def get_sem_version() -> str:
+    return "{:d}.{:d}.{:d}".format(*PROG_VERSION)
+
+
+def valid_arg_iso8601_date(date_arg: str) -> date:
+    try:
+        return date.fromisoformat(date_arg)
+    except ValueError:
+        raise argparse.ArgumentTypeError(
+            f"The given date is not a valid ISO8601 date: {date_arg}"
+        )
 
 
 # TODO allow -c <country> for quick visa info too.
-def validity_days_args() -> int:
+def parse_cli_args() -> int:
     parser = argparse.ArgumentParser(
-        description="Helps you calculate the last valid day to stay in a country given an entry stamp in your passport"
+        prog=PROG_NAME,
+        description="Show Visa infor for a country, or calculate the last valid day to stay in a country given an entry stamp in your passport.",
+        epilog="Find support and source code at https://github.com/erikw/cs50p-project",
     )
-    parser.add_argument(
-        "-d", type=int, help="Number of days your entry is valid e.g. 90 days"
+    parser.add_argument("-v", "--version", action="version", version=get_sem_version())
+
+    # Commmands
+    subparsers = parser.add_subparsers(
+        help="Optional Commands. If none is given, the program will run in interactive mode. Run $(python project.py <command> -h) for more info about a command.",
+        dest="command",
     )
+    subparsers.required = False
+
+    subpar_visa_info = subparsers.add_parser(
+        "visa_info",
+        help="Get Visa information for a country.",
+    )
+    visa_args_group = subpar_visa_info.add_mutually_exclusive_group()
+    visa_args_group.add_argument(
+        "-c",
+        "--country",
+        type=str,
+        choices=valid_countries(),
+        metavar="",
+        help="The country that you will visit.",
+    )  # EMpty metavar prevents printing all choices in the help text. Ref: https://stackoverflow.com/a/16985727
+    visa_args_group.add_argument(
+        "-l",
+        "--list-countries",
+        action="store_true",
+        help="List available countries to check Visa info for.",
+    )
+
+    subpar_exit_calc = subparsers.add_parser(
+        "exit_calc",
+        help="Calculate the last day you can stay in a country given the entry date and entry stamp validity length.",
+    )
+    subpar_exit_calc.add_argument(
+        "-e",
+        "--entry-day",
+        type=valid_arg_iso8601_date,
+        required=True,
+        help="The date you entered the country in ISO8601 format (YYYY-MMM-DD)",
+    )
+    subpar_exit_calc.add_argument(
+        "-d",
+        "--days-valid",
+        type=int,
+        required=True,
+        help="Number of days your entry is valid e.g. 90 days",
+    )
+
     args = parser.parse_args()
-    return args.d
+    from pprint import pprint
+
+    pprint(args)
+    sys.exit()
+    return args
+
 
 def ask_date_entry() -> date:
-    datetime = survey.routines.datetime('What day did you get your entry stamp in your passport?: ', attrs = ('year', 'month', 'day'))
+    datetime = survey.routines.datetime(
+        "What day did you get your entry stamp in your passport?: ",
+        attrs=("year", "month", "day"),
+    )
     return datetime.date()
+
 
 def ask_days_permitted() -> int:
     days = 0
     while days < 1:
-        days = survey.routines.numeric('🔢 How many days is your entry stamp valid?\n(type or use up arrow): ', decimal = False)
+        days = survey.routines.numeric(
+            "🔢 How many days is your entry stamp valid?\n[type or use up arrow]: ",
+            decimal=False,
+        )
         if days < 1:
-            print("An entry stamp is always at least one day valid. Enter again.", file=sys.stderr)
+            print(
+                "An entry stamp is always at least one day valid. Enter again.",
+                file=sys.stderr,
+            )
     return days
 
 
@@ -53,26 +134,29 @@ def last_day_valid_stay(days: int, date_entry: date = date.today()) -> date:
 
 
 def welcome_screen() -> str:
-    #figlet: Figlet = Figlet(width=TERM_WIDTH, justify="center")
+    # figlet: Figlet = Figlet(width=TERM_WIDTH, justify="center")
     figlet: Figlet = Figlet(width=TERM_WIDTH, justify="left")
     # figlet.setFont(font='standard') # The only font guaranteed to exist it seems.
     figlet.setFont(font="slant")
-    ascii = figlet.renderText(PROGRAM_NAME)  # TODO decide proper name.
+    ascii = figlet.renderText(PROG_NAME)  # TODO decide proper name.
     return ascii
-
 
 
 # Just for fun, making the program look cooler...
 def progress_bar_fetch():
     state = None
-    with survey.graphics.SpinProgress(prefix = 'Loading ', suffix = lambda self: state, epilogue = 'Completed!') as progress:
-        for state in (state, ' connecting...', ' parsing...', ' formatting...'):
+    with survey.graphics.SpinProgress(
+        prefix="Loading ", suffix=lambda self: state, epilogue="Completed!"
+    ) as progress:
+        for state in (state, " connecting...", " parsing...", " formatting..."):
             time.sleep(0.75)
 
+
 def print_visa_banner(country):
-    print(Fore.BLUE, end='')
+    print(Fore.BLUE, end="")
     print(VISA_INFO_BANNER_FMT.format(country=country))
-    print(Style.RESET_ALL, end='')
+    print(Style.RESET_ALL, end="")
+
 
 def fetch_visa_info(country):
     # TODO what errors to catch?
@@ -96,6 +180,7 @@ def fetch_visa_info(country):
 
     return (info, links)
 
+
 def show_visa_info(country):
     progress_bar_fetch()
 
@@ -109,66 +194,65 @@ def show_visa_info(country):
     print_visa_banner(country)
 
 
-def read_countries():
-    try:
-        with open(COUNTRIES_CSV_PATH) as file:
-            reader = csv.reader(file)
-            next(reader, None)  # Skip header line.
-            return [row[0] for row in reader]
-    except FileNotFoundError:
-        sys.exit(f"The country list can't be read from path: {COUNTRIES_CSV_PATH}")
+def valid_countries():
+    global countries
+    if not countries:
+        try:
+            with open(COUNTRIES_CSV_PATH) as file:
+                reader = csv.reader(file)
+                next(reader, None)  # Skip header line.
+                countries = sorted([row[0] for row in reader])
+        except FileNotFoundError:
+            sys.exit(f"The country list can't be read from path: {COUNTRIES_CSV_PATH}")
+    return countries
+
 
 def ask_country(countries):
     country_idx = survey.routines.select(
-        "🌎 Which country are you visiting?: ", options=countries
+        "🌎 Which country are you visiting? [select or type]: ", options=countries
     )
     return countries[country_idx]
 
+
 def menu_visa_information():
-    countries = read_countries()
+    countries = valid_countries()
     country = ask_country(countries)
     show_visa_info(country)
+
+
+def print_last_day_valid(days_valid, date_entry):
+    last_day: date = last_day_valid_stay(days_valid, date_entry)
+
+    print("📅 You need to leave the country latest on this day (before midnight):")
+    print(Fore.RED, end="")
+    print(last_day.isoformat(), end="")
+    print(Style.RESET_ALL, end="")
+    print(f" ({last_day.strftime('%A %d, %B %Y')})")
+
 
 def menu_exit_calculator():
     # TODO ask entry day with calendar picker.
     date_entry: date = ask_date_entry()
     days_valid: int = ask_days_permitted()
 
-    last_day: date = last_day_valid_stay(days_valid, date_entry)
+    # TODO extract to function
+    print_last_day_valid(days_valid, date_entry)
 
-    print("📅 You need to leave the country latest on this day (before midnight):")
-    print(Fore.RED, end='')
-    print(last_day.isoformat(), end='')
-    print(Style.RESET_ALL, end='')
-    print(f" ({last_day.strftime('%A %d, %B %Y')})")
-
-def main() -> int:
-    print(welcome_screen())
-
-    visa_days: int
-    if len(sys.argv) > 1:
-        visa_days = validity_days_args()
-    else:
-        visa_days = ask_days_permitted()
-
-    last_day: date = last_day_valid_stay(visa_days)
-    print("You need to leave the country latest on this day (before midnight):")
-    print(last_day.isoformat())
-    print(f"i.e. {last_day.strftime('%A %d, %B %Y')}")
-
-    return 0
 
 def sigint_handler(sig, frame):
     print(f"\n\n\n🛑 Exiting {PROGRAM_NAME}...")
     sys.exit(0)
 
+
 def capture_interrupt_signal():
     signal.signal(signal.SIGINT, sigint_handler)
 
-def main2():
-    capture_interrupt_signal()
-    print(welcome_screen())
 
+def mode_cli():
+    visa_days = parse_cli_args()
+
+
+def mode_interactive():
     progs = ("ℹ️ Visa information for a country", "🖩 Visa exit date calculator")
     choice = survey.routines.select("Pick an option: ", options=progs)
     if choice == 0:
@@ -177,6 +261,17 @@ def main2():
         menu_exit_calculator()
 
 
+def main() -> int:
+    capture_interrupt_signal()
+    print(welcome_screen())
+
+    if len(sys.argv) > 1:
+        mode_cli()
+    else:
+        mode_interactive()
+
+    return 0
+
+
 if __name__ == "__main__":
-    # main()
-    main2()
+    main()

@@ -1,10 +1,8 @@
 # TODOs
-* Write README.md
-* Record video and upload
-* Run all tools: black, mypy etc.
-
-
-# Ideas
+* Tests
 * Use Emoji in outputs ✈️leave country
-* Use https://pypi.org/project/art/ instead of pyfiglet?
 * OPP
+* Moere stylish logo. Use https://pypi.org/project/art/ instead of pyfiglet?
+* Write up README.md
+* Record video and upload. Link from README.
+* Run all tools: black, mypy etc.
