@@ -8,4 +8,3 @@
 * Use Emoji in outputs ✈️leave country
 * Use https://pypi.org/project/art/ instead of pyfiglet?
 * OPP
-* Catch ctrl+c and exit cleanly without error messages

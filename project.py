@@ -2,6 +2,7 @@ import argparse
 import sys
 import csv
 import time
+import signal
 
 from pyfiglet import Figlet
 import survey
@@ -12,6 +13,7 @@ from colorama import Fore, Style
 from datetime import date, timedelta
 
 
+PROGRAM_NAME = 'Visa Tool'
 TERM_WIDTH = 120
 COUNTRIES_CSV_PATH = "countries.csv"
 VISA_URL_FMT = "https://www.projectvisa.com/visainformation/{country}"
@@ -55,7 +57,7 @@ def welcome_screen() -> str:
     figlet: Figlet = Figlet(width=TERM_WIDTH, justify="left")
     # figlet.setFont(font='standard') # The only font guaranteed to exist it seems.
     figlet.setFont(font="slant")
-    ascii = figlet.renderText("Visa Tool")  # TODO decide proper name.
+    ascii = figlet.renderText(PROGRAM_NAME)  # TODO decide proper name.
     return ascii
 
 
@@ -64,7 +66,7 @@ def welcome_screen() -> str:
 def progress_bar_fetch():
     state = None
     with survey.graphics.SpinProgress(prefix = 'Loading ', suffix = lambda self: state, epilogue = 'Completed!') as progress:
-        for state in (state, ' connecting...', ' parsing...', ' analyzing...'):
+        for state in (state, ' connecting...', ' parsing...', ' formatting...'):
             time.sleep(0.75)
 
 def print_visa_banner(country):
@@ -156,7 +158,15 @@ def main() -> int:
 
     return 0
 
+def sigint_handler(sig, frame):
+    print(f"\n\n\n🛑 Exiting {PROGRAM_NAME}...")
+    sys.exit(0)
+
+def capture_interrupt_signal():
+    signal.signal(signal.SIGINT, sigint_handler)
+
 def main2():
+    capture_interrupt_signal()
     print(welcome_screen())
 
     progs = ("ℹ️ Visa information for a country", "🖩 Visa exit date calculator")
