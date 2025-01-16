@@ -1,5 +1,6 @@
 import argparse
 import sys
+import csv
 
 from pyfiglet import Figlet
 
@@ -7,6 +8,7 @@ from datetime import date, timedelta
 
 
 TERM_WIDTH = 120
+COUNTRIES_CSV_PATH = 'countries.csv'
 
 
 def validity_days_args() -> int:
@@ -60,5 +62,43 @@ def main() -> int:
 
     return 0
 
+
+def soup():
+    from bs4 import BeautifulSoup
+    from urllib.request import urlopen
+
+
+    url = "https://www.projectvisa.com/visainformation/Nepal"
+    page = urlopen(url)
+    html = page.read().decode("utf-8")
+    soup = BeautifulSoup(html, "html.parser")
+    t = soup.find(id="Table2")
+
+    # Collect URLs in the text to display after, as we can't render text links in the terminal.
+    links = []
+    for link in t.find_all("a"):
+        links.append(link.get('href'))
+        link.decompose()
+
+    # Remoe empty spaces where URLs has been.
+    info = t.text.replace("\n\n", "\n").strip()
+
+    print(info)
+    print("\n# Links for more information:")
+    print("\n".join(links))
+
+def read_countries():
+    try:
+        with open(COUNTRIES_CSV_PATH) as file:
+            reader = csv.reader(file)
+            return [row[0] for row in reader]
+    except FileNotFoundError:
+        sys.exit(f"The country list can't be read from path: {COUNTRIES_CSV_PATH}")
+
+def main2():
+    countries = read_countries()
+    # soup()
+
 if __name__ == "__main__":
-    main()
+    # main()
+    main2()
