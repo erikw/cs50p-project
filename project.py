@@ -14,7 +14,7 @@ from pyfiglet import Figlet
 import inflect
 
 PROG_NAME = "Visa Tool"
-PROG_VERSION = (1, 0, 0)
+PROG_SEM_VERSION = (1, 0, 0)
 TERM_WIDTH = 120
 COUNTRIES_CSV_PATH = "countries.csv"
 VISA_URL_FMT = "https://www.projectvisa.com/visainformation/{country}"
@@ -29,7 +29,7 @@ countries = None
 
 
 def get_sem_version() -> str:
-    return "{:d}.{:d}.{:d}".format(*PROG_VERSION)
+    return "{:d}.{:d}.{:d}".format(*PROG_SEM_VERSION)
 
 
 def valid_arg_iso8601_date(date_arg: str) -> date:
