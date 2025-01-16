@@ -84,8 +84,9 @@ def parse_cli_args() -> int:
         "-e",
         "--entry-date",
         type=valid_arg_iso8601_date,
-        required=True,
-        help="The date you entered the country in ISO8601 format (YYYY-MMM-DD)",
+        required=False,
+        default=date.today(),
+        help="The date you entered the country in ISO8601 format (YYYY-MMM-DD). Defaults to today.",
     )
     subpar_exit_calc.add_argument(
         "-d",

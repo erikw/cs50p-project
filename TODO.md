@@ -1,5 +1,4 @@
 # TODOs
-* allow special "-e today" or let today be default if none given!, maybe better
 * Tests
 * Split up in different modules, as long as the requirement of three functions and test in project.py is fulfilled.
 * Use Emoji in outputs ✈️leave country
