@@ -29,9 +29,11 @@ def validity_days_args() -> int:
     args = parser.parse_args()
     return args.d
 
+def ask_date_entry() -> date:
+    datetime = survey.routines.datetime('What day did you get your entry stamp in your passport?: ', attrs = ('year', 'month', 'day'))
+    return datetime.date()
 
 def ask_days_permitted() -> int:
-    # TODO also ask what day you got the stamp with  survey.routines.datetime instead of assuming today(). Makes testing easier too.
     days = 0
     while days < 1:
         days = survey.routines.numeric('🔢 How many days is your entry stamp valid?\n(type or use up arrow): ', decimal = False)
@@ -40,12 +42,12 @@ def ask_days_permitted() -> int:
     return days
 
 
-def last_day_valid_from_today(days: int) -> date:
+def last_day_valid_stay(days: int, date_entry: date = date.today()) -> date:
     if days < 1:
         raise ValueError("An entry stamp is always at least one day valid.")
 
     delta = timedelta(days=days - 1)  # -1 because the entry day counts as day 1.
-    return date.today() + delta
+    return date_entry + delta
 
 
 def welcome_screen() -> str:
@@ -66,13 +68,11 @@ def progress_bar_fetch():
             time.sleep(0.75)
 
 def print_visa_banner(country):
-    print(Fore.GREEN, end='')
+    print(Fore.BLUE, end='')
     print(VISA_INFO_BANNER_FMT.format(country=country))
     print(Style.RESET_ALL, end='')
 
-def show_visa_info(country):
-    progress_bar_fetch()
-
+def fetch_visa_info(country):
     # TODO what errors to catch?
     url = VISA_URL_FMT.format(country=country)
     page = urlopen(url)
@@ -90,10 +90,17 @@ def show_visa_info(country):
 
     # Make more concise.
     info = t.text.replace("\n\n", "\n").strip()
+    info += f"\nFetched from {url}\n"
+
+    return (info, links)
+
+def show_visa_info(country):
+    progress_bar_fetch()
+
+    info, links = fetch_visa_info(country)
 
     print_visa_banner(country)
     print(info)
-    print(f"Fetched from {url}\n")
     if links:
         print("🔗 Links for more information:")
         print("\n".join(links))
@@ -122,17 +129,16 @@ def menu_visa_information():
 
 def menu_exit_calculator():
     # TODO ask entry day with calendar picker.
-    date_entry = ask_date_entry()
-    print(f"Entered on: {date_entry}")
-    days_valid = ask_days_permitted()
+    date_entry: date = ask_date_entry()
+    days_valid: int = ask_days_permitted()
 
-    last_day: date = last_day_valid_from_today(days_valid)
+    last_day: date = last_day_valid_stay(days_valid, date_entry)
 
     print("📅 You need to leave the country latest on this day (before midnight):")
     print(Fore.RED, end='')
-    print(last_day.isoformat())
+    print(last_day.isoformat(), end='')
     print(Style.RESET_ALL, end='')
-    print(f"i.e. {last_day.strftime('%A %d, %B %Y')}")
+    print(f" ({last_day.strftime('%A %d, %B %Y')})")
 
 def main() -> int:
     print(welcome_screen())
@@ -143,7 +149,7 @@ def main() -> int:
     else:
         visa_days = ask_days_permitted()
 
-    last_day: date = last_day_valid_from_today(visa_days)
+    last_day: date = last_day_valid_stay(visa_days)
     print("You need to leave the country latest on this day (before midnight):")
     print(last_day.isoformat())
     print(f"i.e. {last_day.strftime('%A %d, %B %Y')}")
