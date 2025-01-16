@@ -8,6 +8,7 @@ from pyfiglet import Figlet
 import survey
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
+from urllib.error import URLError
 from colorama import Fore, Style
 
 from datetime import date, timedelta
@@ -135,7 +136,7 @@ def welcome_screen() -> str:
     figlet: Figlet = Figlet(width=TERM_WIDTH, justify="left")
     # figlet.setFont(font='standard') # The only font guaranteed to exist it seems.
     figlet.setFont(font="slant")
-    ascii = figlet.renderText(PROG_NAME)  # TODO decide proper name.
+    ascii = figlet.renderText(PROG_NAME)
     return ascii
 
 
@@ -156,20 +157,25 @@ def print_visa_banner(country):
 
 
 def fetch_visa_info(country):
-    # TODO what errors to catch?
     url = VISA_URL_FMT.format(country=country)
-    page = urlopen(url)
-    html = page.read().decode("utf-8")
-    soup = BeautifulSoup(html, "html.parser")
-    t = soup.find(id="Table2")
+    try:
+        page = urlopen(url)
+        html = page.read().decode("utf-8")
+    except URLError:
+        sys.exit("Could not fetch remote Visa info. Try again later.")
 
-    # Collect URLs in the text to display after, as we can't render text links in the terminal.
-    links = []
-    for link in t.find_all("a"):
-        href = link.get("href").strip()
-        if href and not href.startswith("/"):
-            links.append(link.get("href"))
-            # link.decompose() # Nope, textual links still needed
+    try:
+        soup = BeautifulSoup(html, "html.parser")
+        t = soup.find(id="Table2")
+
+        # Collect URLs in the text to display after, as we can't render text links in the terminal.
+        links = []
+        for link in t.find_all("a"):
+            href = link.get("href").strip()
+            if href and not href.startswith("/"):
+                links.append(link.get("href"))
+    except (AttributeError, KeyError):
+        sys.exit("Could not parse remote Visa info page.")
 
     # Make more concise.
     info = t.text.replace("\n\n", "\n").strip()
