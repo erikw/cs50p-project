@@ -21,6 +21,8 @@ VISA_URL_FMT = "https://www.projectvisa.com/visainformation/{country}"
 VISA_INFO_BANNER_FMT = (
     "!~~~~~~~~~~~~~~~~~~~ 🛂 Visa Information for {country:} ~~~~~~~~~~~~~~~~~~~!"
 )
+COMMAND_VISA_INFO = 'visa_info'
+COMMAND_EXIT_CALC = 'exit_calc'
 
 # Cache of read countries.
 countries = None
@@ -39,11 +41,10 @@ def valid_arg_iso8601_date(date_arg: str) -> date:
         )
 
 
-# TODO allow -c <country> for quick visa info too.
 def parse_cli_args() -> int:
     parser = argparse.ArgumentParser(
         prog=PROG_NAME,
-        description="Show Visa infor for a country, or calculate the last valid day to stay in a country given an entry stamp in your passport.",
+        description="Utility for Visa related queries. See subcommands. ",
         epilog="Find support and source code at https://github.com/erikw/cs50p-project",
     )
     parser.add_argument("-v", "--version", action="version", version=get_sem_version())
@@ -56,10 +57,10 @@ def parse_cli_args() -> int:
     subparsers.required = False
 
     subpar_visa_info = subparsers.add_parser(
-        "visa_info",
+        COMMAND_VISA_INFO,
         help="Get Visa information for a country.",
     )
-    visa_args_group = subpar_visa_info.add_mutually_exclusive_group()
+    visa_args_group = subpar_visa_info.add_mutually_exclusive_group(required=True)
     visa_args_group.add_argument(
         "-c",
         "--country",
@@ -76,12 +77,12 @@ def parse_cli_args() -> int:
     )
 
     subpar_exit_calc = subparsers.add_parser(
-        "exit_calc",
+        COMMAND_EXIT_CALC,
         help="Calculate the last day you can stay in a country given the entry date and entry stamp validity length.",
     )
     subpar_exit_calc.add_argument(
         "-e",
-        "--entry-day",
+        "--entry-date",
         type=valid_arg_iso8601_date,
         required=True,
         help="The date you entered the country in ISO8601 format (YYYY-MMM-DD)",
@@ -94,12 +95,7 @@ def parse_cli_args() -> int:
         help="Number of days your entry is valid e.g. 90 days",
     )
 
-    args = parser.parse_args()
-    from pprint import pprint
-
-    pprint(args)
-    sys.exit()
-    return args
+    return parser.parse_args()
 
 
 def ask_date_entry() -> date:
@@ -231,11 +227,8 @@ def print_last_day_valid(days_valid, date_entry):
 
 
 def menu_exit_calculator():
-    # TODO ask entry day with calendar picker.
     date_entry: date = ask_date_entry()
     days_valid: int = ask_days_permitted()
-
-    # TODO extract to function
     print_last_day_valid(days_valid, date_entry)
 
 
@@ -247,9 +240,29 @@ def sigint_handler(sig, frame):
 def capture_interrupt_signal():
     signal.signal(signal.SIGINT, sigint_handler)
 
+def print_valid_countries():
+    countries = valid_countries()
+    print("Valid countries to query about Visa information:")
+    print("\n".join(countries))
+
 
 def mode_cli():
-    visa_days = parse_cli_args()
+    args = parse_cli_args()
+
+    from pprint import pprint; pprint(args)
+
+    if args.command == COMMAND_VISA_INFO:
+        if args.country:
+            show_visa_info(args.country)
+        else:
+            print_valid_countries()
+    elif args.command == COMMAND_EXIT_CALC:
+        print_last_day_valid(args.days_valid, args.entry_date)
+    else:
+        print(f"Unknown command {args['command']}. Implementatin error. Contact developer and report bug.", file=sys.stderr)
+        sys.exit()
+
+
 
 
 def mode_interactive():
