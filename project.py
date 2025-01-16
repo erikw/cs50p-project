@@ -11,7 +11,7 @@ from datetime import date, timedelta
 
 
 TERM_WIDTH = 120
-COUNTRIES_CSV_PATH = 'countries.csv'
+COUNTRIES_CSV_PATH = "countries.csv"
 VISA_URL_FMT = "https://www.projectvisa.com/visainformation/{country}"
 
 
@@ -59,7 +59,7 @@ def main() -> int:
 
     visa_days: int
     if len(sys.argv) > 1:
-        visa_days= validity_days_args()
+        visa_days = validity_days_args()
     else:
         visa_days = validity_days_input()
 
@@ -82,17 +82,18 @@ def show_visa_info(country):
     # Collect URLs in the text to display after, as we can't render text links in the terminal.
     links = []
     for link in t.find_all("a"):
-        links.append(link.get('href'))
+        links.append(link.get("href"))
         link.decompose()
 
     # Remoe empty spaces where URLs has been.
     info = t.text.replace("\n\n", "\n").strip()
 
-    print("ℹ️", end='')
+    print("ℹ️", end="")
     print(info)
     print(f"Fetched from {url}\n")
     print("🔗 Links for more information:")
     print("\n".join(links))
+
 
 def read_countries():
     try:
@@ -103,19 +104,23 @@ def read_countries():
     except FileNotFoundError:
         sys.exit(f"The country list can't be read from path: {COUNTRIES_CSV_PATH}")
 
+
 def visa_information():
     countries = read_countries()
-    country_idx = survey.routines.select('🌎 Which country are you visiting?: ', options=countries)
+    country_idx = survey.routines.select(
+        "🌎 Which country are you visiting?: ", options=countries
+    )
     country = countries[country_idx]
     show_visa_info(country)
 
+
 def main2():
-    progs = ('ℹ️ Visa information for a country.', '🖩 Visa exit calculator')
-    choice = survey.routines.select('Pick an option: ', options = progs)
+    progs = ("ℹ️ Visa information for a country", "🖩 Visa exit date calculator")
+    choice = survey.routines.select("Pick an option: ", options=progs)
     if choice == 0:
         visa_information()
     else:
-        ... # TODO
+        ...  # TODO
 
 
 if __name__ == "__main__":
