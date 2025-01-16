@@ -1,11 +1,12 @@
-# Dependencies
-pyfiglet
+# Runtime Dependencies
 beautifulsoup4
-survey
 colorama
+inflect
+pyfiglet
+survey
 
 
-# Development tools
+# Development Tools
 black
 isort
 mypy

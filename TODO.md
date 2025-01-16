@@ -1,5 +1,4 @@
 # TODOs
-* Add "That is in X days, or Y days ago" to exit calculator.
 * Tests
 * Split up in different modules, as long as the requirement of three functions and test in project.py is fulfilled.
 * Use Emoji in outputs ✈️leave country

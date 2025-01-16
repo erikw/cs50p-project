@@ -1,18 +1,17 @@
 import argparse
-import sys
 import csv
-import time
 import signal
+import sys
+import time
+from datetime import date, timedelta
+from urllib.error import URLError
+from urllib.request import urlopen
 
-from pyfiglet import Figlet
 import survey
 from bs4 import BeautifulSoup
-from urllib.request import urlopen
-from urllib.error import URLError
 from colorama import Fore, Style
-
-from datetime import date, timedelta
-
+from pyfiglet import Figlet
+import inflect
 
 PROG_NAME = "Visa Tool"
 PROG_VERSION = (1, 0, 0)
@@ -225,12 +224,22 @@ def menu_visa_information():
 
 def print_last_day_valid(days_valid, date_entry):
     last_day: date = last_day_valid_stay(days_valid, date_entry)
+    days_from_now = (last_day - date.today()).days
 
     print("📅 You need to leave the country latest on this day (before midnight):")
     print(Fore.RED, end="")
     print(last_day.isoformat(), end="")
     print(Style.RESET_ALL, end="")
     print(f" ({last_day.strftime('%A %d, %B %Y')})")
+
+    p = inflect.engine()
+    days_pluralized = p.plural_noun("day", abs(days_from_now)
+    if days_from_now < 0:
+        print(f"That was {days_from_now * -1} {days_pluralized} ago from today (excluding today). What are you still doing in the country? Get out now!")
+    elif days_from_now > 0:
+        print(f"That is {days_from_now} {days_pluralized} from today (excluding today).")
+    else:
+        print(f"Panic! Today is your last valid day. Make sure to leave the country before midnight!!")
 
 
 def menu_exit_calculator():
