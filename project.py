@@ -3,14 +3,19 @@ import sys
 import csv
 
 from pyfiglet import Figlet
+import survey
+from bs4 import BeautifulSoup
+from urllib.request import urlopen
 
 from datetime import date, timedelta
 
 
 TERM_WIDTH = 120
 COUNTRIES_CSV_PATH = 'countries.csv'
+VISA_URL_FMT = "https://www.projectvisa.com/visainformation/{country}"
 
 
+# TODO allow -c <country> for quick visa info too.
 def validity_days_args() -> int:
     parser = argparse.ArgumentParser(
         description="Helps you calculate the last valid day to stay in a country given an entry stamp in your passport"
@@ -25,6 +30,9 @@ def validity_days_args() -> int:
 def validity_days_input() -> int:
     while True:
         try:
+            # TODO use survey routine to enter manual input or common values [30, 60, 90]?
+            # Else just survey.routines.numeric
+            # TODO also ask what day you got the stamp with  survey.routines.datetime instead of assuming today(). Makes testing easier too.
             return int(input("How many days is your entry stamp valid? "))
         except ValueError:
             pass
@@ -63,12 +71,9 @@ def main() -> int:
     return 0
 
 
-def soup():
-    from bs4 import BeautifulSoup
-    from urllib.request import urlopen
-
-
-    url = "https://www.projectvisa.com/visainformation/Nepal"
+def show_visa_info(country):
+    # TODO what errors to catch?
+    url = VISA_URL_FMT.format(country=country)
     page = urlopen(url)
     html = page.read().decode("utf-8")
     soup = BeautifulSoup(html, "html.parser")
@@ -83,21 +88,35 @@ def soup():
     # Remoe empty spaces where URLs has been.
     info = t.text.replace("\n\n", "\n").strip()
 
+    print("ℹ️", end='')
     print(info)
-    print("\n# Links for more information:")
+    print(f"Fetched from {url}\n")
+    print("🔗 Links for more information:")
     print("\n".join(links))
 
 def read_countries():
     try:
         with open(COUNTRIES_CSV_PATH) as file:
             reader = csv.reader(file)
+            next(reader, None)  # Skip header line.
             return [row[0] for row in reader]
     except FileNotFoundError:
         sys.exit(f"The country list can't be read from path: {COUNTRIES_CSV_PATH}")
 
-def main2():
+def visa_information():
     countries = read_countries()
-    # soup()
+    country_idx = survey.routines.select('🌎 Which country are you visiting?: ', options=countries)
+    country = countries[country_idx]
+    show_visa_info(country)
+
+def main2():
+    progs = ('ℹ️ Visa information for a country.', '🖩 Visa exit calculator')
+    choice = survey.routines.select('Pick an option: ', options = progs)
+    if choice == 0:
+        visa_information()
+    else:
+        ... # TODO
+
 
 if __name__ == "__main__":
     # main()

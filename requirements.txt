@@ -1,6 +1,7 @@
 # Dependencies
 pyfiglet
 beautifulsoup4
+survey
 
 # Development tools
 black
