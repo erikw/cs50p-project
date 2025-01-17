@@ -9,6 +9,11 @@ Final project in the [CS50p](https://cs50.harvard.edu/python/2022/) Python cours
 ## Demo
 Demo URL: https://youtu.be/cyB0gfufMFk
 
+<a href="https://youtu.be/cyB0gfufMFk" target="_blank"><img src="demo_video_preview.png" width="120"></a>
+
+
+
+
 ## Problem Description
 For this project I chose to write a tool that solves a problem I know well, a problem I often have in my life. This makes it all more motivating as well to develop! As a frequent traveler, I'm often faced with two problems:
 
