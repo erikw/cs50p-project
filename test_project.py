@@ -4,16 +4,19 @@ from datetime import date, timedelta
 
 import pytest
 
-import project
-from project import (COUNTRIES_CSV_PATH, get_sem_version, last_day_valid_stay,
-                     parse_cli_args, valid_arg_iso8601_date, valid_countries)
+import constants
+# from constants import PROG_SEM_VERSION
+# import project
+from constants import COUNTRIES_CSV_PATH
+from project import (get_sem_version, last_day_valid_stay,
+                     parse_args, valid_arg_iso8601_date, valid_countries)
 
 
 def test_get_sem_version():
-    project.PROG_SEM_VERSION = (1, 0, 0)
+    constants.PROG_SEM_VERSION = (1, 0, 0)
     assert "1.0.0" == get_sem_version()
 
-    project.PROG_SEM_VERSION = (2, 3, 4)
+    constants.PROG_SEM_VERSION = (2, 3, 4)
     assert "2.3.4" == get_sem_version()
 
 
@@ -46,7 +49,7 @@ def test_valid_arg_iso8601_date():
 
 def test_parse_cli_args():
     sys.argv = ["prog_name", "visa_info", "-c", "Germany"]
-    args = parse_cli_args()
+    args = parse_args()
 
     assert "visa_info", args.command
     assert "Germany", args.country
@@ -54,7 +57,7 @@ def test_parse_cli_args():
 
 def test_parse_cli_args_visa_info_list():
     sys.argv = ["prog_name", "visa_info", "-l"]
-    args = parse_cli_args()
+    args = parse_args()
 
     assert "visa_info", args.command
     assert not args.country
@@ -63,7 +66,7 @@ def test_parse_cli_args_visa_info_list():
 
 def test_parse_cli_args_exit_calc_default_entry():
     sys.argv = ["prog_name", "exit_calc", "-d", "5"]
-    args = parse_cli_args()
+    args = parse_args()
 
     assert "exit_calc", args.command
     assert 5, args.days_valid
@@ -72,7 +75,7 @@ def test_parse_cli_args_exit_calc_default_entry():
 
 def test_parse_cli_args_exit_calc_set_entry():
     sys.argv = ["prog_name", "exit_calc", "-d", "5", "-e", "2025-01-17"]
-    args = parse_cli_args()
+    args = parse_args()
 
     assert "exit_calc", args.command
     assert 5, args.days_valid
