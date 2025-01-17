@@ -12,6 +12,11 @@ Final [project](https://cs50.harvard.edu/python/2022/project/) in the [CS50p](ht
 *Demo URL: https://youtu.be/cyB0gfufMFk*
 
 
+## Certificate
+Awared as of completion of this course:
+
+https://cs50.harvard.edu/certificates/19eba3e9-7198-4909-a320-eebd70f26b70
+
 
 ## Problem Description
 For this project I chose to write a tool that solves a problem I know well, a problem I often have in my life. This makes it all more motivating as well to develop! As a frequent traveler, I'm often faced with two problems:
@@ -119,8 +124,3 @@ $ mypy .
 $ isort .
 $ black .
 ```
-
-## Certificate
-Awared as of completion of this course:
-
-https://cs50.harvard.edu/certificates/19eba3e9-7198-4909-a320-eebd70f26b70
