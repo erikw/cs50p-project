@@ -8,8 +8,7 @@ from art import artError, text2art
 from colorama import Fore, Style
 
 from constants import PROG_NAME, VISA_INFO_BANNER_FMT
-from visa import (fetch_visa_info, last_day_valid_stay_visa,
-                  valid_countries_visa)
+from visa import fetch_visa_info, last_day_valid_stay_visa, valid_countries_visa
 
 
 def welcome_screen() -> str:
@@ -18,7 +17,7 @@ def welcome_screen() -> str:
     except artError:
         sys.exit("Could not render logo.")
 
-    screen = Fore.BLUE
+    screen: str = Fore.BLUE
     screen += logo
     screen += Style.RESET_ALL
     return screen
@@ -43,6 +42,8 @@ def print_visa_banner(country: str) -> None:
 def print_visa_info(country: str) -> None:
     progress_bar_fetch()
 
+    info: str
+    links: list[str]
     info, links = fetch_visa_info(country)
 
     print_visa_banner(country)
@@ -55,7 +56,7 @@ def print_visa_info(country: str) -> None:
 
 def print_last_day_valid(days_valid: int, date_entry: date) -> None:
     last_day: date = last_day_valid_stay_visa(days_valid, date_entry)
-    days_from_now = (last_day - date.today()).days
+    days_from_now: int = (last_day - date.today()).days
 
     print("📅 You need to leave the country latest on this day (before midnight):")
     print(Fore.RED, end="")
@@ -64,7 +65,7 @@ def print_last_day_valid(days_valid: int, date_entry: date) -> None:
     print(f" ({last_day.strftime('%A %d, %B %Y')})")
 
     p = inflect.engine()
-    days_pluralized = p.plural_noun("day", abs(days_from_now))
+    days_pluralized: str = p.plural_noun("day", abs(days_from_now))
     if days_from_now < 0:
         print(
             f"That was {days_from_now * -1} {days_pluralized} ago from today (excluding today). What are you still doing in the country? Get out now!"
@@ -80,6 +81,6 @@ def print_last_day_valid(days_valid: int, date_entry: date) -> None:
 
 
 def print_valid_countries() -> None:
-    countries = valid_countries_visa()
+    countries: list[str] = valid_countries_visa()
     print("Valid countries to query about Visa information:")
     print("\n".join(countries))

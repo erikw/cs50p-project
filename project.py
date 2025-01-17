@@ -7,8 +7,12 @@ from datetime import date
 from typing import NoReturn, no_type_check
 
 from constants import PROG_NAME
-from mode_cli import (get_sem_version_cli, mode_cli, parse_args_cli,
-                      valid_arg_iso8601_date_cli)
+from mode_cli import (
+    get_sem_version_cli,
+    mode_cli,
+    parse_args_cli,
+    valid_arg_iso8601_date_cli,
+)
 from mode_interactive import mode_interactive
 from ui import welcome_screen
 from visa import last_day_valid_stay_visa, valid_countries_visa

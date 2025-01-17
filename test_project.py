@@ -6,8 +6,13 @@ import pytest
 
 import constants
 from constants import COUNTRIES_CSV_PATH
-from project import (get_sem_version, last_day_valid_stay, parse_args,
-                     valid_arg_iso8601_date, valid_countries)
+from project import (
+    get_sem_version,
+    last_day_valid_stay,
+    parse_args,
+    valid_arg_iso8601_date,
+    valid_countries,
+)
 
 
 def test_get_sem_version() -> None:

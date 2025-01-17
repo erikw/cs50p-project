@@ -82,7 +82,7 @@ def parse_args_cli() -> argparse.Namespace:
 
 
 def mode_cli() -> None:
-    args = parse_args_cli()
+    args: argparse.Namespace = parse_args_cli()
 
     if args.command == COMMAND_VISA_INFO:
         if args.country:
