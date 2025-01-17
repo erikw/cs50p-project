@@ -119,3 +119,8 @@ $ mypy .
 $ isort .
 $ black .
 ```
+
+## Certificate
+Awared as of completion of this course:
+
+https://cs50.harvard.edu/certificates/19eba3e9-7198-4909-a320-eebd70f26b70
