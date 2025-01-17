@@ -28,24 +28,79 @@ To get Visa information, the best source I could find on the Internet is [projec
 To calculate the last allowed day to stay in a country, the two parameters are the date of entry in the county and the length of allowed stay. Now this is not rocket science directly, it's a matter of one addition and one substraction operation. The key is to actually add and substract the right things (every time), which is why this is a helpful too compared to manual calculating or finger counting in the calendar.
 
 ## Implementation
-Here's a brief implementation description in the format of looking at each module's responsibility and actions.
-[0m[01;34m.[0m/
-[01;34m..[0m/
-constants.py
-countries.csv
-[01;34m.git[0m/
-.gitignore
-mode_cli.py
-mode_interactive.py
-[01;34m.mypy_cache[0m/
-.mypy.ini
-[01;32mproject.py[0m*
-[01;34m.pytest_cache[0m/
-.pytest.ini
-README.md
-requirements.txt
-test_project.py
-TODO.md
-ui.py
-visa.py
-[01;34m.vscode[0m/
+Here's a brief implementation description in the format of looking at each module and file's responsibility and actions.
+
+#### `constants.py`
+Contains all constants. I broke these out to its own module to avoid circular dependencies between modules that uses the same constants.
+
+#### `countries.csv`
+This is a static list of all allowed countries that projectvisa.com knows about. It's in the format that is used in their URL scheme as there could be different ways of abbreveating or styling a country's name. A future extension of this program would introduce a second column being the display name, and use this in the interactive ui selector.
+
+#### `.gitignore`
+Self-explanatory. What to ignore from being tracked in the VCS.
+
+#### `mode_cli.py`
+When the CLI mode is activated the functions in this module are used to parse CLI arguments and call the reqested functionality with the right parameters.
+
+#### `mode_interactive.py`
+When the program is launched in interactive mode (meaning no CLI args), then the functions in here will take care of quering the user in the right order for the feature to activate and the corresponding paramters needed for that feature.
+
+
+#### `.mypy.ini`
+Configuration file for the static type checker.
+
+#### `project.py`
+This is the main module, as per specified mandatory naming convention according to the problem description. The main module will set up a signal handler for the SIGINT (ctr+c) signal and handle a clean exit, print a welcome screen with ASCII art, and then chose to start the program in CLI or interactice mode as determiend by wheter or not any CLI arguments was passed by the invoker.
+
+
+#### `.pytest.ini`
+Configuration file for `pytest`. Needed to work around a [bug](https://github.com/Exahilosys/survey/issues/38) that I discovered in the library I used for user input querying.
+
+
+#### `requirements.txt`
+Pip Python package manager listing needed runtime dependencies and development tools used.
+
+
+#### `test_project.py`
+Testing functions in `project.py` according to the naming conventions layied out in the problem description.
+
+#### `ui.py`
+This module takes responsibility for producing much of the output the user and the formatting of this.
+
+
+#### `visa.py`
+The Visa module contains the main business logic of this program including date calculation and Visa information fetching and parsing.
+
+## CLI Arguments
+If you don't specify any CLI arguments, the program will launch in interactive mode. Run the program with `-h` or `<command> -h` for the most up to date help descriptions.
+
+
+```command
+$ ./project.py -h
+ _   _  _               _____                _
+| | | |(_)             |_   _|              | |
+| | | | _  ___   __ _    | |    ___    ___  | |
+| | | || |/ __| / _` |   | |   / _ \  / _ \ | |
+\ \_/ /| |\__ \| (_| |   | |  | (_) || (_) || |
+ \___/ |_||___/ \__,_|   \_/   \___/  \___/ |_|
+
+
+usage: Visa Tool [-h] [-v] {visa_info,exit_calc} ...
+
+Utility for Visa related queries. See subcommands.
+
+positional arguments:
+  {visa_info,exit_calc}
+                        Optional Commands. If none is given, the program will
+                        run in interactive mode. Run $(python project.py
+                        <command> -h) for more info about a command.
+    visa_info           Get Visa information for a country.
+    exit_calc           Calculate the last day you can stay in a country given
+                        the entry date and entry stamp validity length.
+
+options:
+  -h, --help            show this help message and exit
+  -v, --version         show program's version number and exit
+
+Find support and source code at https://github.com/erikw/cs50p-project
+```
