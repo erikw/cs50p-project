@@ -4,7 +4,7 @@
 [![Top programming languages used](https://img.shields.io/github/languages/top/erikw/cs50p-project)](#)
 [![Latest tag](https://img.shields.io/github/v/tag/erikw/cs50p-project)](https://github.com/erikw/cs50p-project/tags)
 
-Final project in the [CS50p](https://cs50.harvard.edu/python/2022/) Python course.
+Final [project](https://cs50.harvard.edu/python/2022/project/) in the [CS50p](https://cs50.harvard.edu/python/2022/) Python course.
 
 ## Demo
 <a href="https://youtu.be/cyB0gfufMFk" title="View demo video"><img src="demo_video_preview.png" width="580" alt="Demo Video Preview"></a>
