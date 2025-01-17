@@ -1,6 +1,4 @@
 # TODOs
-* OPP
-* Moere stylish logo. Use https://pypi.org/project/art/ instead of pyfiglet?
 * Write up README.md. Badges?
 * Record video and upload. Travel music (free license)? Link from README.
 * Run all tools: black, mypy etc.

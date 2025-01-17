@@ -1,8 +1,8 @@
 # Runtime Dependencies
+art
 beautifulsoup4
 colorama
 inflect
-pyfiglet
 survey
 
 

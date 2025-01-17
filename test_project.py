@@ -6,13 +6,8 @@ import pytest
 
 import constants
 from constants import COUNTRIES_CSV_PATH
-from project import (
-    get_sem_version,
-    last_day_valid_stay,
-    parse_args,
-    valid_arg_iso8601_date,
-    valid_countries,
-)
+from project import (get_sem_version, last_day_valid_stay, parse_args,
+                     valid_arg_iso8601_date, valid_countries)
 
 
 def test_get_sem_version():
@@ -50,7 +45,7 @@ def test_valid_arg_iso8601_date():
         valid_arg_iso8601_date("1970")
 
 
-def test_parse_cli_args():
+def test_parse_args():
     sys.argv = ["prog_name", "visa_info", "-c", "Germany"]
     args = parse_args()
 
@@ -58,7 +53,7 @@ def test_parse_cli_args():
     assert "Germany", args.country
 
 
-def test_parse_cli_args_visa_info_list():
+def test_parse_args_visa_info_list():
     sys.argv = ["prog_name", "visa_info", "-l"]
     args = parse_args()
 
@@ -67,7 +62,7 @@ def test_parse_cli_args_visa_info_list():
     assert args.list_countries
 
 
-def test_parse_cli_args_exit_calc_default_entry():
+def test_parse_args_exit_calc_default_entry():
     sys.argv = ["prog_name", "exit_calc", "-d", "5"]
     args = parse_args()
 
@@ -76,7 +71,7 @@ def test_parse_cli_args_exit_calc_default_entry():
     assert date.today() == args.entry_date
 
 
-def test_parse_cli_args_exit_calc_set_entry():
+def test_parse_args_exit_calc_set_entry():
     sys.argv = ["prog_name", "exit_calc", "-d", "5", "-e", "2025-01-17"]
     args = parse_args()
 

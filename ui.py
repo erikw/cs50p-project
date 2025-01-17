@@ -3,20 +3,24 @@ from datetime import date
 
 import inflect
 import survey
+from art import artError, text2art
 from colorama import Fore, Style
-from pyfiglet import Figlet
 
-from constants import PROG_NAME, TERM_WIDTH, VISA_INFO_BANNER_FMT
-from visa import fetch_visa_info, last_day_valid_stay_visa, valid_countries_visa
+from constants import PROG_NAME, VISA_INFO_BANNER_FMT
+from visa import (fetch_visa_info, last_day_valid_stay_visa,
+                  valid_countries_visa)
 
 
 def welcome_screen() -> str:
-    # figlet: Figlet = Figlet(width=TERM_WIDTH, justify="center")
-    figlet: Figlet = Figlet(width=TERM_WIDTH, justify="left")
-    # figlet.setFont(font='standard') # The only font guaranteed to exist it seems.
-    figlet.setFont(font="slant")
-    ascii = figlet.renderText(PROG_NAME)
-    return ascii
+    try:
+        logo = text2art(PROG_NAME, font="doom")
+    except artError:
+        sys.exit("Could not render logo.")
+    else:
+        screen = Fore.BLUE
+        screen += logo
+        screen += Style.RESET_ALL
+        return screen
 
 
 # Just for fun, making the program look cooler...
