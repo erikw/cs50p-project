@@ -1,4 +1,5 @@
 import csv
+import sys
 from datetime import date, timedelta
 from urllib.error import URLError
 from urllib.request import urlopen
@@ -11,7 +12,7 @@ from constants import COUNTRIES_CSV_PATH, VISA_URL_FMT
 countries = None
 
 
-def valid_countries_visa():
+def valid_countries_visa() -> list[str]:
     global countries
     if not countries:
         try:
@@ -24,7 +25,7 @@ def valid_countries_visa():
     return countries
 
 
-def fetch_visa_info(country):
+def fetch_visa_info(country: str) -> tuple[str, list[str]]:
     url = VISA_URL_FMT.format(country=country)
     try:
         page = urlopen(url)

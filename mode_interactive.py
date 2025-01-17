@@ -7,7 +7,7 @@ from ui import print_last_day_valid, print_visa_info
 from visa import valid_countries_visa
 
 
-def ask_country(countries):
+def ask_country(countries: list[str]) -> str:
     country_idx = survey.routines.select(
         "🌎 Which country are you visiting? [select or type]: ", options=countries
     )
@@ -37,19 +37,19 @@ def ask_days_permitted() -> int:
     return days
 
 
-def menu_visa_information():
+def menu_visa_information() -> None:
     countries = valid_countries_visa()
     country = ask_country(countries)
     print_visa_info(country)
 
 
-def menu_exit_calculator():
+def menu_exit_calculator() -> None:
     date_entry: date = ask_date_entry()
     days_valid: int = ask_days_permitted()
     print_last_day_valid(days_valid, date_entry)
 
 
-def mode_interactive():
+def mode_interactive() -> None:
     progs = ("ℹ️ Visa information for a country", "🖩 Visa exit date calculator")
     choice = survey.routines.select("Pick an option: ", options=progs)
     if choice == 0:

@@ -33,6 +33,8 @@ Here's a brief implementation description in the format of looking at each modul
 #### `constants.py`
 Contains all constants. I broke these out to its own module to avoid circular dependencies between modules that use the same constants.
 
+For this project, I opted to add type hints and check with the `mypy` tool for compliancy.
+
 #### `countries.csv`
 This is a static list of all allowed countries that projectvisa.com knows about. It's in the format that is used in their URL scheme as there could be different ways of abbreviating or styling a country's name. A future extension of this program would introduce a second column being the display name, and use this in the interactive ui selector.
 

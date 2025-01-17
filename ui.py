@@ -1,3 +1,4 @@
+import sys
 import time
 from datetime import date
 
@@ -16,15 +17,15 @@ def welcome_screen() -> str:
         logo = text2art(PROG_NAME, font="doom")
     except artError:
         sys.exit("Could not render logo.")
-    else:
-        screen = Fore.BLUE
-        screen += logo
-        screen += Style.RESET_ALL
-        return screen
+
+    screen = Fore.BLUE
+    screen += logo
+    screen += Style.RESET_ALL
+    return screen
 
 
 # Just for fun, making the program look cooler...
-def progress_bar_fetch():
+def progress_bar_fetch() -> None:
     state = None
     with survey.graphics.SpinProgress(
         prefix="Loading ", suffix=lambda self: state, epilogue="Completed!"
@@ -33,13 +34,13 @@ def progress_bar_fetch():
             time.sleep(0.75)
 
 
-def print_visa_banner(country):
+def print_visa_banner(country: str) -> None:
     print(Fore.BLUE, end="")
     print(VISA_INFO_BANNER_FMT.format(country=country))
     print(Style.RESET_ALL, end="")
 
 
-def print_visa_info(country):
+def print_visa_info(country: str) -> None:
     progress_bar_fetch()
 
     info, links = fetch_visa_info(country)
@@ -52,7 +53,7 @@ def print_visa_info(country):
     print_visa_banner(country)
 
 
-def print_last_day_valid(days_valid, date_entry):
+def print_last_day_valid(days_valid: int, date_entry: date) -> None:
     last_day: date = last_day_valid_stay_visa(days_valid, date_entry)
     days_from_now = (last_day - date.today()).days
 
@@ -78,7 +79,7 @@ def print_last_day_valid(days_valid, date_entry):
         )
 
 
-def print_valid_countries():
+def print_valid_countries() -> None:
     countries = valid_countries_visa()
     print("Valid countries to query about Visa information:")
     print("\n".join(countries))

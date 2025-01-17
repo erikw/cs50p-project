@@ -1,4 +1,5 @@
 import argparse
+import sys
 from datetime import date
 
 import constants  # To not split PROG_SEM_VERSION to two symbols, preventing chaning value in test. Ref: https://stackoverflow.com/a/3536638
@@ -20,7 +21,7 @@ def valid_arg_iso8601_date_cli(date_arg: str) -> date:
         )
 
 
-def parse_args_cli() -> int:
+def parse_args_cli() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         prog=PROG_NAME,
         description="Utility for Visa related queries. See subcommands. ",
@@ -80,7 +81,7 @@ def parse_args_cli() -> int:
     return parser.parse_args()
 
 
-def mode_cli():
+def mode_cli() -> None:
     args = parse_args_cli()
 
     if args.command == COMMAND_VISA_INFO:
@@ -94,7 +95,7 @@ def mode_cli():
         print_last_day_valid(args.days_valid, args.entry_date)
     else:
         print(
-            f"Unknown command {args['command']}. Implementatin error. Contact developer and report bug.",
+            f"Unknown command {args.command}. Implementatin error. Contact developer and report bug.",
             file=sys.stderr,
         )
         sys.exit()
