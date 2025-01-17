@@ -104,3 +104,12 @@ options:
 
 Find support and source code at https://github.com/erikw/cs50p-project
 ```
+
+## Development
+Rememer to run:
+```command
+$ pytest
+$ black .
+$ isort .
+$ mypy .
+```
