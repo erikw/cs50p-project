@@ -7,10 +7,9 @@
 Final project in the [CS50p](https://cs50.harvard.edu/python/2022/) Python course.
 
 ## Demo
-Demo URL: https://youtu.be/cyB0gfufMFk
-
 <a href="https://youtu.be/cyB0gfufMFk" title="View demo video"><img src="demo_video_preview.png" width="580" alt="Demo Video Preview"></a>
 
+*Demo URL: https://youtu.be/cyB0gfufMFk*
 
 
 
