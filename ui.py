@@ -1,13 +1,14 @@
 import time
 from datetime import date
 
-from pyfiglet import Figlet
 import inflect
 import survey
 from colorama import Fore, Style
+from pyfiglet import Figlet
 
 from constants import PROG_NAME, TERM_WIDTH, VISA_INFO_BANNER_FMT
 from visa import fetch_visa_info, last_day_valid_stay_visa, valid_countries_visa
+
 
 def welcome_screen() -> str:
     # figlet: Figlet = Figlet(width=TERM_WIDTH, justify="center")
@@ -27,6 +28,7 @@ def progress_bar_fetch():
         for state in (state, " connecting...", " parsing...", " formatting..."):
             time.sleep(0.75)
 
+
 def print_visa_banner(country):
     print(Fore.BLUE, end="")
     print(VISA_INFO_BANNER_FMT.format(country=country))
@@ -44,6 +46,7 @@ def print_visa_info(country):
         print("🔗 Links for more information:")
         print("\n".join(links))
     print_visa_banner(country)
+
 
 def print_last_day_valid(days_valid, date_entry):
     last_day: date = last_day_valid_stay_visa(days_valid, date_entry)
@@ -69,6 +72,7 @@ def print_last_day_valid(days_valid, date_entry):
         print(
             f"Panic! Today is your last valid day. Make sure to leave the country before midnight!!"
         )
+
 
 def print_valid_countries():
     countries = valid_countries_visa()

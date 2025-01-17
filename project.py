@@ -4,16 +4,20 @@ import signal
 import sys
 from datetime import date
 
+from mode_cli import (
+    get_sem_version_cli,
+    mode_cli,
+    parse_args_cli,
+    valid_arg_iso8601_date_cli,
+)
 from mode_interactive import mode_interactive
-from mode_cli import mode_cli, parse_args_cli, valid_arg_iso8601_date_cli, get_sem_version_cli
-from constants import PROG_SEM_VERSION
 from ui import welcome_screen
-from visa import valid_countries_visa, last_day_valid_stay_visa
-
+from visa import last_day_valid_stay_visa, valid_countries_visa
 
 
 def get_sem_version() -> str:
     return get_sem_version_cli()
+
 
 def parse_args():
     return parse_args_cli()

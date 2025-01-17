@@ -1,15 +1,18 @@
 import sys
 from datetime import date
-from ui import print_visa_info, print_last_day_valid
-from visa import valid_countries_visa
 
 import survey
+
+from ui import print_last_day_valid, print_visa_info
+from visa import valid_countries_visa
+
 
 def ask_country(countries):
     country_idx = survey.routines.select(
         "🌎 Which country are you visiting? [select or type]: ", options=countries
     )
     return countries[country_idx]
+
 
 def ask_date_entry() -> date:
     datetime = survey.routines.datetime(
@@ -34,17 +37,16 @@ def ask_days_permitted() -> int:
     return days
 
 
-
 def menu_visa_information():
     countries = valid_countries_visa()
     country = ask_country(countries)
     print_visa_info(country)
 
+
 def menu_exit_calculator():
     date_entry: date = ask_date_entry()
     days_valid: int = ask_days_permitted()
     print_last_day_valid(days_valid, date_entry)
-
 
 
 def mode_interactive():

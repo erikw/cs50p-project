@@ -1,14 +1,15 @@
 import csv
+from datetime import date, timedelta
 from urllib.error import URLError
 from urllib.request import urlopen
-from datetime import date, timedelta
 
 from bs4 import BeautifulSoup
 
-from constants import VISA_URL_FMT, COUNTRIES_CSV_PATH
+from constants import COUNTRIES_CSV_PATH, VISA_URL_FMT
 
 # Cache of read countries.
 countries = None
+
 
 def valid_countries_visa():
     global countries
@@ -21,6 +22,7 @@ def valid_countries_visa():
         except FileNotFoundError:
             sys.exit(f"The country list can't be read from path: {COUNTRIES_CSV_PATH}")
     return countries
+
 
 def fetch_visa_info(country):
     url = VISA_URL_FMT.format(country=country)
@@ -48,6 +50,7 @@ def fetch_visa_info(country):
     info += f"\nFetched from {url}\n"
 
     return (info, links)
+
 
 def last_day_valid_stay_visa(days: int, date_entry: date = date.today()) -> date:
     if days < 1:

@@ -1,13 +1,15 @@
 import argparse
 from datetime import date
 
-import constants # To not split PROG_SEM_VERSION to two symbols, preventing chaning value in test. Ref: https://stackoverflow.com/a/3536638
-from constants import PROG_NAME, COMMAND_VISA_INFO, COMMAND_EXIT_CALC
-from ui import print_visa_info, print_last_day_valid, print_valid_countries
+import constants  # To not split PROG_SEM_VERSION to two symbols, preventing chaning value in test. Ref: https://stackoverflow.com/a/3536638
+from constants import COMMAND_EXIT_CALC, COMMAND_VISA_INFO, PROG_NAME
+from ui import print_last_day_valid, print_valid_countries, print_visa_info
 from visa import valid_countries_visa
+
 
 def get_sem_version_cli() -> str:
     return "{:d}.{:d}.{:d}".format(*constants.PROG_SEM_VERSION)
+
 
 def valid_arg_iso8601_date_cli(date_arg: str) -> date:
     try:
@@ -17,13 +19,16 @@ def valid_arg_iso8601_date_cli(date_arg: str) -> date:
             f"The given date is not a valid ISO8601 date: {date_arg}"
         )
 
+
 def parse_args_cli() -> int:
     parser = argparse.ArgumentParser(
         prog=PROG_NAME,
         description="Utility for Visa related queries. See subcommands. ",
         epilog="Find support and source code at https://github.com/erikw/cs50p-project",
     )
-    parser.add_argument("-v", "--version", action="version", version=get_sem_version_cli())
+    parser.add_argument(
+        "-v", "--version", action="version", version=get_sem_version_cli()
+    )
 
     # Commmands
     subparsers = parser.add_subparsers(
