@@ -1,10 +1,12 @@
-import pytest
 import argparse
 import sys
 from datetime import date, timedelta
 
+import pytest
+
 import project
-from project import get_sem_version, valid_arg_iso8601_date, parse_cli_args, last_day_valid_stay, valid_countries, COUNTRIES_CSV_PATH
+from project import (COUNTRIES_CSV_PATH, get_sem_version, last_day_valid_stay,
+                     parse_cli_args, valid_arg_iso8601_date, valid_countries)
 
 
 def test_get_sem_version():
@@ -58,6 +60,7 @@ def test_parse_cli_args_visa_info_list():
     assert not args.country
     assert args.list_countries
 
+
 def test_parse_cli_args_exit_calc_default_entry():
     sys.argv = ["prog_name", "exit_calc", "-d", "5"]
     args = parse_cli_args()
@@ -65,6 +68,7 @@ def test_parse_cli_args_exit_calc_default_entry():
     assert "exit_calc", args.command
     assert 5, args.days_valid
     assert date.today() == args.entry_date
+
 
 def test_parse_cli_args_exit_calc_set_entry():
     sys.argv = ["prog_name", "exit_calc", "-d", "5", "-e", "2025-01-17"]
@@ -81,6 +85,7 @@ def test_last_day_valid_stay():
 
     date_valid = date_entry + timedelta(days - 1)
     assert date_valid == last_day_valid_stay(days, date_entry)
+
 
 def test_last_day_valid_stay_invalid():
     date_entry = date.today()

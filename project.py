@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import argparse
 import csv
 import signal
@@ -7,11 +9,11 @@ from datetime import date, timedelta
 from urllib.error import URLError
 from urllib.request import urlopen
 
+import inflect
 import survey
 from bs4 import BeautifulSoup
 from colorama import Fore, Style
 from pyfiglet import Figlet
-import inflect
 
 PROG_NAME = "Visa Tool"
 PROG_SEM_VERSION = (1, 0, 0)
