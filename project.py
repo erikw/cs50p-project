@@ -272,10 +272,6 @@ def print_valid_countries():
 def mode_cli():
     args = parse_cli_args()
 
-    from pprint import pprint
-
-    pprint(args)
-
     if args.command == COMMAND_VISA_INFO:
         if args.country:
             show_visa_info(args.country)

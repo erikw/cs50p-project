@@ -1,5 +1,4 @@
 # TODOs
-* Tests
 * Split up in different modules, as long as the requirement of three functions and test in project.py is fulfilled.
 * OPP
 * Moere stylish logo. Use https://pypi.org/project/art/ instead of pyfiglet?
