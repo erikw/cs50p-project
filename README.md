@@ -74,11 +74,11 @@ Testing functions in `project.py` according to the naming conventions layed out 
 #### `ui.py`
 This module takes responsibility for producing much of the output of the user and the formatting of this.
 
-#### `visa.py`
+### `visa.py`
 The Visa module contains the main business logic of this program including date calculation and Visa information fetching and parsing.
 
 
-## CLI Arguments
+## Usage
 If you don't specify any CLI arguments, the program will launch in interactive mode. Run the program with `-h` or `<command> -h` for the most up to date help descriptions.
 
 
@@ -113,7 +113,7 @@ Find support and source code at https://github.com/erikw/cs50p-project
 ```
 
 ## Development
-Rememer to run:
+Remembmer to run:
 ```command
 $ pytest
 $ mypy .
