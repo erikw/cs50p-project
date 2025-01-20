@@ -36,6 +36,40 @@ To get Visa information, the best source I could find on the Internet is [projec
 
 To calculate the last allowed day to stay in a country, the two parameters are the date of entry in the county and the length of allowed stay. Now this is not rocket science directly, it's a matter of one addition and one subtraction operation. The key is to actually add and subtract the right things (every time), which is why this is a helpful tool compared to manual calculating or finger counting in the calendar.
 
+## Usage
+If you don't specify any CLI arguments, the program will launch in interactive mode. Run the program with `-h` or `<command> -h` for the most up to date help descriptions.
+
+
+```command
+$ ./project.py -h
+ _   _  _               _____                _
+| | | |(_)             |_   _|              | |
+| | | | _  ___   __ _    | |    ___    ___  | |
+| | | || |/ __| / _` |   | |   / _ \  / _ \ | |
+\ \_/ /| |\__ \| (_| |   | |  | (_) || (_) || |
+ \___/ |_||___/ \__,_|   \_/   \___/  \___/ |_|
+
+
+usage: Visa Tool [-h] [-v] {visa_info,exit_calc} ...
+
+Utility for Visa related queries. See subcommands.
+
+positional arguments:
+  {visa_info,exit_calc}
+                        Optional Commands. If none is given, the program will
+                        run in interactive mode. Run $(python project.py
+                        <command> -h) for more info about a command.
+    visa_info           Get Visa information for a country.
+    exit_calc           Calculate the last day you can stay in a country given
+                        the entry date and entry stamp validity length.
+
+options:
+  -h, --help            show this help message and exit
+  -v, --version         show program's version number and exit
+
+Find support and source code at https://github.com/erikw/cs50p-project
+```
+
 ## Implementation
 Here's a brief implementation description in the format of looking at each module and file's responsibility and actions.
 
@@ -77,40 +111,6 @@ This module takes responsibility for producing much of the output of the user an
 #### :page_facing_up: [`visa.py`](visa.py)
 The Visa module contains the main business logic of this program including date calculation and Visa information fetching and parsing.
 
-
-## Usage
-If you don't specify any CLI arguments, the program will launch in interactive mode. Run the program with `-h` or `<command> -h` for the most up to date help descriptions.
-
-
-```command
-$ ./project.py -h
- _   _  _               _____                _
-| | | |(_)             |_   _|              | |
-| | | | _  ___   __ _    | |    ___    ___  | |
-| | | || |/ __| / _` |   | |   / _ \  / _ \ | |
-\ \_/ /| |\__ \| (_| |   | |  | (_) || (_) || |
- \___/ |_||___/ \__,_|   \_/   \___/  \___/ |_|
-
-
-usage: Visa Tool [-h] [-v] {visa_info,exit_calc} ...
-
-Utility for Visa related queries. See subcommands.
-
-positional arguments:
-  {visa_info,exit_calc}
-                        Optional Commands. If none is given, the program will
-                        run in interactive mode. Run $(python project.py
-                        <command> -h) for more info about a command.
-    visa_info           Get Visa information for a country.
-    exit_calc           Calculate the last day you can stay in a country given
-                        the entry date and entry stamp validity length.
-
-options:
-  -h, --help            show this help message and exit
-  -v, --version         show program's version number and exit
-
-Find support and source code at https://github.com/erikw/cs50p-project
-```
 
 ## Development
 Remembmer to run:
