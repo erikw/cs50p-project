@@ -41,37 +41,37 @@ Here's a brief implementation description in the format of looking at each modul
 
 For this project, I opted to add [type hints](https://docs.python.org/3/library/typing.html) and check with the [`mypy`](https://github.com/python/mypy) tool for compliancy.
 
-#### [`.gitignore`]
+#### :page_facing_up: [`.gitignore`](.gitignore)
 Self-explanatory. What to ignore from being tracked in the VCS.
 
-#### [`.mypy.ini`]
+#### :page_facing_up: [`.mypy.ini`](.mypy.ini)
 Configuration file for the static type checker.
 
-#### [`.pytest.ini`]
+#### :page_facing_up: [`.pytest.ini`](.pytest.ini)
 Configuration file for `pytest`. Needed to work around a [bug](https://github.com/Exahilosys/survey/issues/38) that I discovered in the library I used for user input querying.
 
-#### [`constants.py`]
+#### :page_facing_up: [`constants.py`](constants.py)
 Contains all constants. I broke these out to its own module to avoid circular dependencies between modules that use the same constants.
 
-#### [`countries.csv`]
+#### :page_facing_up: [`countries.csv`](countries.csv)
 This is a static list of all allowed countries that projectvisa.com knows about. It's in the format that is used in their URL scheme as there could be different ways of abbreviating or styling a country's name. A future extension of this program would introduce a second column being the display name, and use this in the interactive ui selector.
 
-#### [`mode_cli.py`]
+#### :page_facing_up: [`mode_cli.py`](mode_cli.py)
 When the CLI mode is activated the functions in this module are used to parse CLI arguments and call the requested functionality with the right parameters.
 
-#### [`mode_interactive.py`]
+#### :page_facing_up: [`mode_interactive.py`](mode_interactive.py)
 When the program is launched in interactive mode (meaning no CLI args), then the functions in here will take care of querying the user in the right order for the feature to activate and the corresponding parameters needed for that feature.
 
-#### [`project.py`]
+#### :page_facing_up: [`project.py`](project.py)
 This is the main module, as per specified mandatory naming convention according to the problem description. The main module will set up a signal handler for the SIGINT (ctr+c) signal and handle a clean exit, print a welcome screen with ASCII art, and then chose to start the program in CLI or interactive mode as determined by whether or not any CLI arguments was passed by the invoker.
 
-#### [`requirements.txt`]
+#### :page_facing_up: [`requirements.txt`](requirements.txt)
 Pip Python package manager listing needed runtime dependencies and development tools used.
 
-#### [`test_project.py`]
+#### :page_facing_up: [`test_project.py`](test_project.py)
 Testing functions in `project.py` according to the naming conventions layed out in the problem description.
 
-#### [`ui.py`]
+#### :page_facing_up: [`ui.py`](ui.py)
 This module takes responsibility for producing much of the output of the user and the formatting of this.
 
 #### :page_facing_up: [`visa.py`](visa.py)
