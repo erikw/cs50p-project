@@ -74,7 +74,7 @@ Testing functions in `project.py` according to the naming conventions layed out 
 #### [`ui.py`]
 This module takes responsibility for producing much of the output of the user and the formatting of this.
 
-#### [`visa.py`]
+#### :page_facing_up: [`visa.py`](visa.py)
 The Visa module contains the main business logic of this program including date calculation and Visa information fetching and parsing.
 
 
