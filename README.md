@@ -2,22 +2,22 @@
 [![SLOC](https://sloc.xyz/github/erikw/cs50p-project)](#)
 [![Number of programming languages used](https://img.shields.io/github/languages/count/erikw/cs50p-project)](#)
 [![Top programming languages used](https://img.shields.io/github/languages/top/erikw/cs50p-project)](#)
+[![Number of files in repo](https://img.shields.io/github/directory-file-count/erikw/cs50p-project
+)](#)
 [![Latest tag](https://img.shields.io/github/v/tag/erikw/cs50p-project)](https://github.com/erikw/cs50p-project/tags)
 
 Final [project](https://cs50.harvard.edu/python/2022/project/) in the [CS50P](https://cs50.harvard.edu/python/2022/) Python course.
 
 ## Demo
-<a href="https://youtu.be/cyB0gfufMFk" title="View demo video"><img src="img/demo_video_preview.png" width="580" alt="Demo Video Preview"></a>
+<a href="https://youtu.be/cyB0gfufMFk" title="View demo video"><img src="demo_video_preview.png" width="580" alt="Demo Video Preview"></a>
 
 *Demo URL: https://youtu.be/cyB0gfufMFk*
 
 
 ## Achievements
-Official certificate awared as of completion of this course:
+Awared as of completion of this course:
 
-<a href="https://cs50.harvard.edu/certificates/19eba3e9-7198-4909-a320-eebd70f26b70" title="Official certificate"><img src="img/cert_thumbnail.png" width="300" alt="Certificate Preview"></a>
-
-*Verification URL: https://cs50.harvard.edu/certificates/19eba3e9-7198-4909-a320-eebd70f26b70*
+https://cs50.harvard.edu/certificates/19eba3e9-7198-4909-a320-eebd70f26b70
 
 
 ## Problem Description
