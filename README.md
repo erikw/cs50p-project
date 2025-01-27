@@ -13,7 +13,7 @@ Final [project](https://cs50.harvard.edu/python/2022/project/) in the [CS50P](ht
 
 
 ## Achievements
-Awared as of completion of this course:
+Certificate awared as of completion of this course:
 
 https://cs50.harvard.edu/certificates/19eba3e9-7198-4909-a320-eebd70f26b70
 
