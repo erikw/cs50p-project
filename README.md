@@ -5,6 +5,7 @@
 [![Number of files in repo](https://img.shields.io/github/directory-file-count/erikw/cs50p-project
 )](#)
 [![Latest tag](https://img.shields.io/github/v/tag/erikw/cs50p-project)](https://github.com/erikw/cs50p-project/tags)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 Final [project](https://cs50.harvard.edu/python/2022/project/) in the [CS50P](https://cs50.harvard.edu/python/2022/) Python course.
 
