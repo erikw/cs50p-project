@@ -4,6 +4,8 @@
 [![Top programming languages used](https://img.shields.io/github/languages/top/erikw/cs50p-project)](#)
 [![Number of files in repo](https://img.shields.io/github/directory-file-count/erikw/cs50p-project
 )](#)
+[![Repo file size](https://img.shields.io/github/repo-size/erikw/cs50p-project
+)](#)
 [![Latest tag](https://img.shields.io/github/v/tag/erikw/cs50p-project)](https://github.com/erikw/cs50p-project/tags)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html)
 
