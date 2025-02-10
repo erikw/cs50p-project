@@ -2,8 +2,7 @@
 [![SLOC](https://sloc.xyz/github/erikw/cs50p-project)](#)
 [![Number of programming languages used](https://img.shields.io/github/languages/count/erikw/cs50p-project)](#)
 [![Top programming languages used](https://img.shields.io/github/languages/top/erikw/cs50p-project)](#)
-[![Number of files in repo](https://img.shields.io/github/directory-file-count/erikw/cs50p-project
-)](#)
+[![Number of files in repo](https://img.shields.io/github/directory-file-count/erikw/cs50p-project)](#)
 [![Repo file size](https://img.shields.io/github/repo-size/erikw/cs50p-project
 )](#)
 [![Latest tag](https://img.shields.io/github/v/tag/erikw/cs50p-project)](https://github.com/erikw/cs50p-project/tags)
