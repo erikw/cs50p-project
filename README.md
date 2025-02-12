@@ -47,6 +47,7 @@ If you don't specify any CLI arguments, the program will launch in interactive m
 
 
 ```command
+$ pip install -r requirements.txt
 $ ./project.py -h
  _   _  _               _____                _
 | | | |(_)             |_   _|              | |
@@ -121,6 +122,7 @@ The Visa module contains the main business logic of this program including date 
 ## Development
 Remembmer to run:
 ```command
+$ pip install -r requirements.txt
 $ pytest
 $ mypy .
 $ isort .
