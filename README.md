@@ -1,5 +1,5 @@
 # CS50P Project - Visa Tool 🛂
-[![SLOC](https://sloc.xyz/github/erikw/cs50p-project)](#)
+[![SLOC](https://sloc.xyz/github/erikw/cs50p-project?lower=true)](#)
 [![Number of programming languages used](https://img.shields.io/github/languages/count/erikw/cs50p-project)](#)
 [![Top programming languages used](https://img.shields.io/github/languages/top/erikw/cs50p-project)](#)
 [![Number of files in repo](https://img.shields.io/github/directory-file-count/erikw/cs50p-project)](#)
