@@ -8,6 +8,11 @@
 [![Latest tag](https://img.shields.io/github/v/tag/erikw/cs50p-project)](https://github.com/erikw/cs50p-project/tags)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html)
 
+<p align="center">
+    <!-- Ref: https://dev.to/azure/adding-a-github-codespace-button-to-your-readme-5f6l -->
+    <a href="https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=917050205" title="Open in GitHub Codespaces" ><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg"></a>
+</p>
+
 Final [project](https://cs50.harvard.edu/python/2022/project/) in the [CS50P](https://cs50.harvard.edu/python/2022/) Python course.
 
 ## Demo
