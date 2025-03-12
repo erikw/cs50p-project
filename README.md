@@ -125,7 +125,7 @@ The Visa module contains the main business logic of this program including date 
 
 
 ## Development
-Remembmer to run:
+Remember to run:
 ```command
 $ pip install -r requirements.txt
 $ pytest
