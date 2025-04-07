@@ -24,4 +24,4 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
     - name: Run pytest with coverage
-      run: pytest --cov
+      run: pytest --verbose --capture=no --cov
