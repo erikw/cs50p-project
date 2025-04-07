@@ -8,6 +8,8 @@ survey  == 5.4.2
 
 # Development Tools
 black
+ipython
 isort
 mypy
+pudb
 pytest
