@@ -6,10 +6,12 @@ on:
     branches: main
     paths:
       - '**.py'
+      - '.github/workflows/tests.yml'
   pull_request:
     branches: main
     paths:
       - '**.py'
+      - '.github/workflows/tests.yml'
 
 jobs:
   test:
