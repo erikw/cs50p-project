@@ -13,3 +13,4 @@ isort
 mypy
 pudb
 pytest
+pytest-cov
