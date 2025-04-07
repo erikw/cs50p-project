@@ -1,9 +1,9 @@
 # Runtime Dependencies
-art
-beautifulsoup4
-colorama
-inflect
-survey
+art == 6.4
+beautifulsoup4 == 4.13.3
+colorama == 0.4.6
+inflect == 7.5.0
+survey  == 5.4.2
 
 
 # Development Tools
