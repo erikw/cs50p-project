@@ -1,0 +1,37 @@
+[project]
+name = "visa_tool"
+version = "0.1.0"
+description = "A tool for visa calculations like last valid day of entry and fetching visa information per country."
+authors = [
+    {name = "Erik Westrup",email = "erik.westrup@icloud.com"}
+]
+readme = "README.md"
+homepage = "https://github.com/erikw/cs50p-project"
+keywords = ["visa", "visa calculator", "visa information", "visa information"]
+classifiers = ["Topic :: Utilities"]
+include = ["CHANGELOG.md", "README.md"]
+requires-python = ">=3.12"
+
+
+
+[tool.poetry.dependencies]
+art = "^6.4"
+beautifulsoup4 = "^4.13"
+colorama = "^0.4"
+inflect = "^7.5"
+survey  = "5.4"
+
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^25.1"
+ipdb = "^0.13"
+isort = "^6.0"
+ipython = "^9.1"
+mypy = "^1.15"
+pytest = "^8.3"
+pytest-cov = "^6.1"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

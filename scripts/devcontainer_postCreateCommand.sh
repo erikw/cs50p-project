@@ -5,4 +5,4 @@
 set -eux
 
 # For project.
-# pip install -r requirements.txt
+poetry install

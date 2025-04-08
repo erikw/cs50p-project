@@ -27,7 +27,7 @@ Final [project](https://cs50.harvard.edu/python/2022/project/) in the [CS50P](ht
 
 
 ## Achievements
-Official certificate awared as of completion of this course:
+Official certificate awarded as of completion of this course:
 
 <a href="https://cs50.harvard.edu/certificates/19eba3e9-7198-4909-a320-eebd70f26b70" title="Official certificate"><img src="img/cert_thumbnail.png" width="300" alt="Certificate Preview"></a>
 
