@@ -9,7 +9,7 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html)
 
 [![Tests](https://github.com/erikw/cs50p-project/actions/workflows/tests.yml/badge.svg)](https://github.com/erikw/cs50p-project/actions/workflows/tests.yml)
-[![Lint Code Base](https://github.com/erikw/cs50p-project/actions/workflows/linter.yml/badge.svg)](https://github.com/erikw/cs50p-project/actions/workflows/linter.yml)
+[![Lint](https://github.com/erikw/cs50p-project/actions/workflows/linter.yml/badge.svg)](https://github.com/erikw/cs50p-project/actions/workflows/linter.yml)
 [![CodeQL](https://github.com/erikw/cs50p-project/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/erikw/cs50p-project/actions/workflows/codeql-analysis.yml)
 [![Dependabot Updates](https://github.com/erikw/cs50p-project/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/erikw/cs50p-project/actions/workflows/dependabot/dependabot-updates)
 
