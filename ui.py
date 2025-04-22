@@ -76,7 +76,7 @@ def print_last_day_valid(days_valid: int, date_entry: date) -> None:
         )
     else:
         print(
-            f"Panic! Today is your last valid day. Make sure to leave the country before midnight!!"
+            "Panic! Today is your last valid day. Make sure to leave the country before midnight!!"
         )
 
 
