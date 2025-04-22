@@ -15,10 +15,10 @@ def get_sem_version_cli() -> str:
 def valid_arg_iso8601_date_cli(date_arg: str) -> date:
     try:
         return date.fromisoformat(date_arg)
-    except ValueError:
+    except ValueError as ve:
         raise argparse.ArgumentTypeError(
             f"The given date is not a valid ISO8601 date: {date_arg}"
-        )
+        ) from ve
 
 
 def parse_args_cli() -> argparse.Namespace:
