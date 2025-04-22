@@ -1,5 +1,12 @@
 {
-    "github.copilot.enable": { "*": false },
+    // Disable Copilot
+    "chat.commandCenter.enabled": false,
+    "github.copilot.chat.useProjectTemplates": false,
     "github.copilot.editor.enableAutoCompletions": false,
-    "chat.commandCenter.enabled": false
+    "github.copilot.enable": { "*": false },
+    "inlineChat.lineNaturalLanguageHint": false,
+    "terminal.integrated.initialHint": false,
+    "workbench.editor.empty.hint": "hidden",
+
+
 }
