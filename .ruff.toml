@@ -1,0 +1,23 @@
+line-length = 160
+indent-width = 4
+
+[lint]
+# All supported rules: https://docs.astral.sh/ruff/rules/
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    #"UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    #"SIM",
+    # isort
+    "I",
+]
+
+[format]
+quote-style = "double"
+indent-style = "space"
