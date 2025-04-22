@@ -26,10 +26,8 @@ def welcome_screen() -> str:
 # Just for fun, making the program look cooler...
 def progress_bar_fetch() -> None:
     state = None
-    with survey.graphics.SpinProgress(
-        prefix="Loading ", suffix=lambda self: state, epilogue="Completed!"
-    ):
-        for state in (state, " connecting...", " parsing...", " formatting..."):
+    with survey.graphics.SpinProgress(prefix="Loading ", suffix=lambda self: state, epilogue="Completed!"):
+        for _state in (state, " connecting...", " parsing...", " formatting..."):
             time.sleep(0.75)
 
 
@@ -67,17 +65,11 @@ def print_last_day_valid(days_valid: int, date_entry: date) -> None:
     p = inflect.engine()
     days_pluralized: str = p.plural_noun("day", abs(days_from_now))
     if days_from_now < 0:
-        print(
-            f"That was {days_from_now * -1} {days_pluralized} ago from today (excluding today). What are you still doing in the country? Get out now!"
-        )
+        print(f"That was {days_from_now * -1} {days_pluralized} ago from today (excluding today). What are you still doing in the country? Get out now!")
     elif days_from_now > 0:
-        print(
-            f"That is {days_from_now} {days_pluralized} from today (excluding today)."
-        )
+        print(f"That is {days_from_now} {days_pluralized} from today (excluding today).")
     else:
-        print(
-            "Panic! Today is your last valid day. Make sure to leave the country before midnight!!"
-        )
+        print("Panic! Today is your last valid day. Make sure to leave the country before midnight!!")
 
 
 def print_valid_countries() -> None:

@@ -16,9 +16,7 @@ def valid_arg_iso8601_date_cli(date_arg: str) -> date:
     try:
         return date.fromisoformat(date_arg)
     except ValueError as ve:
-        raise argparse.ArgumentTypeError(
-            f"The given date is not a valid ISO8601 date: {date_arg}"
-        ) from ve
+        raise argparse.ArgumentTypeError(f"The given date is not a valid ISO8601 date: {date_arg}") from ve
 
 
 def parse_args_cli() -> argparse.Namespace:
@@ -27,13 +25,14 @@ def parse_args_cli() -> argparse.Namespace:
         description="Utility for Visa related queries. See subcommands. ",
         epilog="Find support and source code at https://github.com/erikw/cs50p-project",
     )
-    parser.add_argument(
-        "-v", "--version", action="version", version=get_sem_version_cli()
-    )
+    parser.add_argument("-v", "--version", action="version", version=get_sem_version_cli())
 
     # Commmands
     subparsers = parser.add_subparsers(
-        help="Optional Commands. If none is given, the program will run in interactive mode. Run $(python project.py <command> -h) for more info about a command.",
+        help=(
+            "Optional Commands. If none is given, the program will run in interactive mode. "
+            "Run $(python project.py <command> -h) for more info about a command."
+        ),
         dest="command",
     )
     subparsers.required = False

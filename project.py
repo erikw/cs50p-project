@@ -34,7 +34,9 @@ def valid_countries() -> list[str]:
     return valid_countries_visa()
 
 
-def last_day_valid_stay(days: int, date_entry: date = date.today()) -> date:
+def last_day_valid_stay(days: int, date_entry: date = None) -> date:
+    if not date_entry:
+        date_entry = date.today()
     return last_day_valid_stay_visa(days, date_entry)
 
 

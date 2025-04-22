@@ -7,6 +7,4 @@ COMMAND_EXIT_CALC = "exit_calc"
 COUNTRIES_CSV_PATH = "countries.csv"
 
 VISA_URL_FMT = "https://www.projectvisa.com/visainformation/{country}"
-VISA_INFO_BANNER_FMT = (
-    "!~~~~~~~~~~~~~~~~~~~ 🛂 Visa Information for {country:} ~~~~~~~~~~~~~~~~~~~!"
-)
+VISA_INFO_BANNER_FMT = "!~~~~~~~~~~~~~~~~~~~ 🛂 Visa Information for {country:} ~~~~~~~~~~~~~~~~~~~!"

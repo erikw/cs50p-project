@@ -8,9 +8,7 @@ from visa import valid_countries_visa
 
 
 def ask_country(countries: list[str]) -> str:
-    country_idx: int = survey.routines.select(
-        "🌎 Which country are you visiting? [select or type]: ", options=countries
-    )
+    country_idx: int = survey.routines.select("🌎 Which country are you visiting? [select or type]: ", options=countries)
     return countries[country_idx]
 
 

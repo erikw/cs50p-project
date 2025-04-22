@@ -53,7 +53,9 @@ def fetch_visa_info(country: str) -> tuple[str, list[str]]:
     return (info, links)
 
 
-def last_day_valid_stay_visa(days: int, date_entry: date = date.today()) -> date:
+def last_day_valid_stay_visa(days: int, date_entry: date = None) -> date:
+    if not date_entry:
+        date_entry = date.today()
     if days < 1:
         raise ValueError("An entry stamp is always at least one day valid.")
 
