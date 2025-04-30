@@ -9,4 +9,13 @@
     "workbench.editor.empty.hint": "hidden",
 
 
+    // Testing
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.testing.pytestArgs": [
+        "."
+    ],
+
+
+    // Misc
 }
