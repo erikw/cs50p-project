@@ -12,9 +12,7 @@
     // Testing
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
-    "python.testing.pytestArgs": [
-        "."
-    ],
+    // "python.testing.pytestArgs": [ "." ], // Not needed as of .pytest.ini
 
 
     // Misc
