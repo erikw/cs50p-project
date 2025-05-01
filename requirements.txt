@@ -1,5 +1,5 @@
 # Runtime Dependencies
-art == 6.4
+art == 6.5
 beautifulsoup4 == 4.13.3
 colorama == 0.4.6
 inflect == 7.5.0
